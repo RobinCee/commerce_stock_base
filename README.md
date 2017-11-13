@@ -5,6 +5,14 @@ Based on Commerce's profile.
 
 Use this for Commerce Stock development.
 
+!!!BEFORE YOU BEGIN!!!
+
+This installation profile requires one custom patch, else the profile will
+fail to import the view listing products per store.
+
+The patch is available in the `patches` folder. Apply it to commerce before
+attempting to install Drupal.
+
 ## Start developing on Commerce Stock
 
 You need to clone the commerce_stock repository onGithub via the project page.
