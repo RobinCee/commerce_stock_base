@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_store
+id: physical_b
+label: Physical (b)
+description: ''
+traits: {  }

@@ -1,0 +1,7 @@
+{
+  "name": "RobinCee/commerce_stock_base",
+  "type": "drupal-profile",
+  "description": "Commerce 2.x installation profile for commerce_stock",
+  "homepage": "https://github.com/RobinCee/commerce_stock_base",
+  "license": "GPL-2.0+"
+}

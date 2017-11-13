@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_store.commerce_store_type.physical_b
+    - field.field.commerce_store.physical_b.field_available_stock_locations
+    - field.field.commerce_store.physical_b.field_stock_allocation_location
+  module:
+    - address
+id: commerce_store.physical_b.default
+targetEntityType: commerce_store
+bundle: physical_b
+mode: default
+content:
+  address:
+    type: address_default
+    settings:
+      default_country: site_default
+    weight: 3
+    region: content
+    third_party_settings: {  }
+  billing_countries:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  default_currency:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_available_stock_locations:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_stock_allocation_location:
+    weight: 52
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  mail:
+    type: email_default
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  prices_include_tax:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    region: content
+    third_party_settings: {  }
+  tax_registrations:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

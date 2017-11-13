@@ -1,0 +1,5 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cool_room_max_20_c
+label: 'Cool room max 20 (c)'

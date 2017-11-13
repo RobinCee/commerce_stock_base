@@ -1,0 +1,301 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the commerce_stock_base profile.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
+use Drupal\Core\Cache\Cache;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function commerce_stock_base_install() {
+  // Set front page to "node".
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/node')->save(TRUE);
+
+  // Allow visitor account creation with administrative approval.
+  $user_settings = \Drupal::configFactory()->getEditable('user.settings');
+  $user_settings->set('register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)->save(TRUE);
+
+  // Enable default permissions for system roles.
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, ['access comments']);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['access comments', 'post comments', 'skip comment approval']);
+
+  // Assign user 1 the "administrator" role.
+  $user = User::load(1);
+  $user->roles[] = 'administrator';
+  $user->save();
+
+  // Enable the Contact link in the footer menu.
+  /** @var \Drupal\Core\Menu\MenuLinkManagerInterface $menu_link_manager */
+  $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+  $menu_link_manager->updateDefinition('contact.site_page', ['enabled' => TRUE]);
+
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, ['access site-wide contact form']);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['access site-wide contact form']);
+
+  // Allow authenticated users to use shortcuts.
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['access shortcuts']);
+
+  // Populate the default shortcut set.
+  $shortcut = entity_create('shortcut', [
+    'shortcut_set' => 'default',
+    'title' => t('Add content'),
+    'weight' => -20,
+    'link' => ['uri' => 'internal:/node/add'],
+  ]);
+  $shortcut->save();
+
+  $shortcut = entity_create('shortcut', [
+    'shortcut_set' => 'default',
+    'title' => t('All content'),
+    'weight' => -19,
+    'link' => ['uri' => 'internal:/admin/content'],
+  ]);
+  $shortcut->save();
+
+  // Allow all users to use search.
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, ['search content']);
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['search content']);
+
+  // Enable the admin theme.
+  \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', TRUE)->save(TRUE);
+
+  // Create stock locations.
+  $location_storage = \Drupal::entityTypeManager()->getStorage('commerce_stock_location', '');
+  $locations = [
+    'cool_room_a' => [
+      'type' => 'cool_room_max_20_c',
+      'name' => 'Cool room A',
+    ],
+    'cool_room_b' => [
+      'type' => 'cool_room_max_20_c',
+      'name' => 'Cool room B',
+    ],
+    'cool_room_c' => [
+      'type' => 'cool_room_max_20_c',
+      'name' => 'Cool room C',
+    ],
+    'warehouse_a' => [
+      'type' => 'warehouse',
+      'name' => 'Warehouse A',
+    ],
+    'warehouse_b' => [
+      'type' => 'warehouse',
+      'name' => 'Warehouse B',
+    ],
+    'warehouse_c' => [
+      'type' => 'warehouse',
+      'name' => 'Warehouse C',
+    ],
+    'warehouse_d' => [
+      'type' => 'warehouse',
+      'name' => 'Warehouse D',
+    ],
+    'warehouse_e' => [
+      'type' => 'warehouse',
+      'name' => 'Warehouse E',
+    ],
+  ];
+  foreach ($locations as $location_id => $values) {
+    $location = $location_storage->create($values);
+    $location->save();
+  }
+
+  // Create multiple stores.
+  $store_storage = \Drupal::entityTypeManager()->getStorage('commerce_store');
+  $currency_code = 'USD';
+  $country_code = 'US';
+  $stores = [
+    'test_store_a' => [
+      'values' => [
+        'type' => 'online',
+        'uid' => 1,
+        'name' => 'Test store A',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 1,
+        'field_available_stock_locations' => [1,2,3,4],
+      ],
+    ],
+    'test_store_b' => [
+      'values' => [
+        'type' => 'online',
+        'uid' => 1,
+        'name' => 'Test store B',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 2,
+        'field_available_stock_locations' => [1,2,3,4],
+      ],
+    ],
+    'test_store_c' => [
+      'values' => [
+        'type' => 'online',
+        'uid' => 1,
+        'name' => 'Test store C',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 3,
+        'field_available_stock_locations' => [1,2,3,4],
+      ],
+    ],
+    'test_warehouse_d' => [
+      'values' => [
+        'type' => 'warehouse',
+        'uid' => 1,
+        'name' => 'Test warehouse D',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 5,
+        'field_available_stock_locations' => [5, 6, 7, 8],
+      ],
+    ],
+    'test_warehouse_e' => [
+      'values' => [
+        'type' => 'warehouse',
+        'uid' => 1,
+        'name' => 'Test warehouse E',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 6,
+        'field_available_stock_locations' => [5, 6, 7, 8],
+      ],
+    ],
+    'test_physical_f' => [
+      'values' => [
+        'type' => 'physical_b',
+        'uid' => 1,
+        'name' => 'Test physical F',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 7,
+        'field_available_stock_locations' => [5, 6, 7, 8],
+      ],
+    ],
+    'test_physical_g' => [
+      'values' => [
+        'type' => 'physical_b',
+        'uid' => 1,
+        'name' => 'Test physical G',
+        'mail' => 'admin@example.com',
+        'address' => [
+          'country_code' => $country_code,
+        ],
+        'default_currency' => $currency_code,
+        'field_stock_allocation_location' => 8,
+        'field_available_stock_locations' => [5, 6, 7, 8],
+      ],
+    ],
+  ];
+  foreach ($stores as $store_id => $store_values) {
+    $store = $store_storage->create($store_values['values']);
+    $store->save();
+    // Mark the test_physical_e store as the default store.
+    // This is to prevent from store 1 being the default store while testing.
+    if ($store_id == 'test_physical_e') {
+      $config = \Drupal::getContainer()->get('config.factory')
+        ->getEditable('commerce_store.settings');
+      $config->set('default_store', $store->uuid());
+      $config->save();
+    }
+  }
+
+  $store_config = \Drupal::getContainer()->get('config.factory')->getEditable('commerce_store.settings');
+  $store_config
+    ->set('default_store', '10f1d639-3921-4617-ac9e-06c87683bced')
+    ->save();
+
+  // Set service_manager to use local stock as default.
+  $stock_config = \Drupal::service('config.factory')->getEditable('commerce_stock.service_manager');
+  $stock_config
+  ->set('default_service_id', 'local_stock')
+  ->set('commerce_product_variation_default_service_id', 'local_stock')
+  ->save();
+
+  // Add stock field to product variation edit form.
+   \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('commerce_product_variation.default.default')
+    ->setComponent('field_stock', [
+          'label' => 'Stock',
+          'type' => 'commerce_stock_level_simple',
+          'weight' => 2,
+          'region' => 'content',
+          'settings' => [
+            'transaction_note' => 0,
+            'entry_system' => 'simple',
+          ],
+      ])->save();
+
+  // Add Available stock locations field to store online edit form. 
+  \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('commerce_store.online.default')
+    ->setComponent('field_available_stock_locations', [
+          'label' => 'Available stock locations',
+          'type' => 'options_select',
+          'weight' => 7,
+          'region' => 'content',
+          'settings' => [],
+          'third_party_settings' => [],
+      ])->save();
+
+  // Add Stock allocation location field to store online edit form. 
+  \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('commerce_store.online.default')
+    ->setComponent('field_stock_allocation_location', [
+          'label' => 'Stock allocation location',
+          'type' => 'options_select',
+          'weight' => 8,
+          'region' => 'content',
+          'settings' => [],
+          'third_party_settings' => [],
+      ])->save();
+
+  // Remove Available stock locations field from store online entity view mode. 
+  \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('commerce_store.online.default')
+    ->setComponent('field_available_stock_locations', [
+          'type' => 'hidden',
+      ])->save();
+
+  // Remove Stock allocation location field from store online entity view mode. 
+  \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('commerce_store.online.default')
+    ->setComponent('field_stock_allocation_location', [
+          'type' => 'hidden',
+      ])->save();
+
+  \Drupal::service('module_installer')->install(['default_content'], TRUE); 
+
+  drupal_flush_all_caches();
+}

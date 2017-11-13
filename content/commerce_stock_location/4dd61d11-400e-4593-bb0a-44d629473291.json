@@ -1,0 +1,49 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/commerce_stock_location\/2?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/cool_room_max_20_c"
+        }
+    },
+    "location_id": [
+        {
+            "value": 2
+        }
+    ],
+    "uuid": [
+        {
+            "value": "df131b95-0c6a-4ecb-8d1c-c37c228c5dd9"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "cool_room_max_20_c"
+        }
+    ],
+    "name": [
+        {
+            "value": "Cool room A",
+            "lang": "en"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ]
+}

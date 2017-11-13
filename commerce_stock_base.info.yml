@@ -1,0 +1,79 @@
+name: Commerce Stock Base
+type: profile
+core: 8.x
+description: 'Install with Drupal Commerce Stock pre-configured.'
+distribution:
+  name: 'Drupal'
+dependencies:
+  # Standard
+  - node
+  - history
+  - block
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - help
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - tour
+  - automated_cron
+
+  # Commerce
+  - address
+  - entity
+  - profile
+  - inline_entity_form
+  - state_machine
+  - commerce
+  - commerce_log
+  - commerce_checkout
+  - commerce_cart
+  - commerce_order
+  - commerce_product
+  - commerce_price
+  - commerce_store
+  - commerce_payment
+  - commerce_promotion
+  - commerce_tax
+
+  # Commerce Stock.
+  - commerce_stock
+  - commerce_stock_field
+  - commerce_stock_local
+  - commerce_stock_ui
+  # Payment example is enabled to be able to complete checkout without additional actions.
+  - commerce_payment_example
+
+  # Contrib
+  - admin_toolbar
+  - admin_toolbar_tools
+  - swiftmailer
+  # Enables quick store switching.
+  - commerce_store_selector
+
+themes:
+  - bartik
+  - seven

@@ -1,0 +1,208 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/store\/5?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/commerce_store\/warehouse"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/uid": [
+            {
+                "href": "http:\/\/default\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/field_available_stock_locations": [
+            {
+                "href": "http:\/\/default\/commerce_stock_location\/5?_format=hal_json",
+                "lang": "en"
+            },
+            {
+                "href": "http:\/\/default\/commerce_stock_location\/6?_format=hal_json",
+                "lang": "en"
+            },
+            {
+                "href": "http:\/\/default\/commerce_stock_location\/7?_format=hal_json",
+                "lang": "en"
+            },
+            {
+                "href": "http:\/\/default\/commerce_stock_location\/8?_format=hal_json",
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/field_stock_allocation_location": [
+            {
+                "href": "http:\/\/default\/commerce_stock_location\/6?_format=hal_json",
+                "lang": "en"
+            }
+        ]
+    },
+    "store_id": [
+        {
+            "value": 5
+        }
+    ],
+    "uuid": [
+        {
+            "value": "c0d6fd4b-1110-4b01-946d-716d75d00c90"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "warehouse"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "24b2ea8a-7617-48c3-b631-4f00ad67254e"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/field_available_stock_locations": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/commerce_stock_location\/5?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/warehouse"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "c7437ad3-fa85-442a-8860-f6e736c97458"
+                    }
+                ],
+                "lang": "en"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/commerce_stock_location\/6?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/warehouse"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "2d8dfbbd-e33b-4626-a4f9-35097f1254df"
+                    }
+                ],
+                "lang": "en"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/commerce_stock_location\/7?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/warehouse"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6f671751-f029-4755-92c2-92b52846cc68"
+                    }
+                ],
+                "lang": "en"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/commerce_stock_location\/8?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/warehouse"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "f8b2e766-e34b-4d55-9f91-8c44246c3a74"
+                    }
+                ],
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/commerce_store\/warehouse\/field_stock_allocation_location": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/commerce_stock_location\/6?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/commerce_stock_location\/warehouse"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "2d8dfbbd-e33b-4626-a4f9-35097f1254df"
+                    }
+                ],
+                "lang": "en"
+            }
+        ]
+    },
+    "name": [
+        {
+            "value": "Test warehouse E",
+            "lang": "en"
+        }
+    ],
+    "mail": [
+        {
+            "value": "admin@example.com"
+        }
+    ],
+    "default_currency": [
+        {
+            "target_id": "USD",
+            "lang": "en"
+        }
+    ],
+    "address": [
+        {
+            "langcode": null,
+            "country_code": "US",
+            "administrative_area": null,
+            "locality": null,
+            "dependent_locality": null,
+            "postal_code": null,
+            "sorting_code": null,
+            "address_line1": null,
+            "address_line2": null,
+            "organization": null,
+            "given_name": null,
+            "additional_name": null,
+            "family_name": null
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
+    "prices_include_tax": [
+        {
+            "value": false
+        }
+    ]
+}

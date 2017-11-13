@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_store_selector
+  theme:
+    - bartik
+id: selectstore
+theme: bartik
+region: sidebar_first
+weight: 0
+provider: null
+plugin: store_selection
+settings:
+  id: store_selection
+  label: 'Select store'
+  provider: commerce_store_selector
+  label_display: visible
+  store_selection_settings: null
+visibility: {  }

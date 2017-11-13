@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_store.commerce_store_type.warehouse
+    - field.field.commerce_store.warehouse.field_available_stock_locations
+    - field.field.commerce_store.warehouse.field_stock_allocation_location
+id: commerce_store.warehouse.default
+targetEntityType: commerce_store
+bundle: warehouse
+mode: default
+content: {  }
+hidden:
+  address: true
+  billing_countries: true
+  default_currency: true
+  field_available_stock_locations: true
+  field_stock_allocation_location: true
+  mail: true
+  name: true
+  prices_include_tax: true
+  tax_registrations: true
