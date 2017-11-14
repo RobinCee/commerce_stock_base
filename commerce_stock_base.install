@@ -242,7 +242,7 @@ function commerce_stock_base_install() {
    \Drupal::entityTypeManager()
     ->getStorage('entity_form_display')
     ->load('commerce_product_variation.default.default')
-    ->setComponent('field_stock', [
+    ->setComponent('field_stock_level', [
           'label' => 'Stock',
           'type' => 'commerce_stock_level_simple',
           'weight' => 2,
@@ -296,6 +296,4 @@ function commerce_stock_base_install() {
       ])->save();
 
   \Drupal::service('module_installer')->install(['default_content'], TRUE); 
-
-  drupal_flush_all_caches();
 }
