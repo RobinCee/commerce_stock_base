@@ -4,8 +4,8 @@ dependencies:
   module:
     - commerce_product
     - commerce_stock_field
-id: commerce_product_variation.field_stock
-field_name: field_stock
+id: commerce_product_variation.field_stock_level
+field_name: field_stock_level
 entity_type: commerce_product_variation
 type: commerce_stock_level
 settings: {  }
