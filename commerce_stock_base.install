@@ -103,6 +103,18 @@ function commerce_stock_base_install() {
       'type' => 'warehouse',
       'name' => 'Warehouse E',
     ],
+    'secure_cabinet_i' => [
+      'type' => 'warehouse',
+      'name' => 'Secure cabinet I',
+    ],
+    'secure_cabinet_ii' => [
+      'type' => 'warehouse',
+      'name' => 'Secure cabinet II',
+    ],
+    'secure_cabinet_iii' => [
+      'type' => 'warehouse',
+      'name' => 'Secure cabinet III',
+    ],
   ];
   foreach ($locations as $location_id => $values) {
     $location = $location_storage->create($values);
@@ -125,7 +137,7 @@ function commerce_stock_base_install() {
         ],
         'default_currency' => $currency_code,
         'field_stock_allocation_location' => 1,
-        'field_available_stock_locations' => [1,2,3,4],
+        'field_available_stock_locations' => [1],
       ],
     ],
     'test_store_b' => [
@@ -139,7 +151,7 @@ function commerce_stock_base_install() {
         ],
         'default_currency' => $currency_code,
         'field_stock_allocation_location' => 2,
-        'field_available_stock_locations' => [1,2,3,4],
+        'field_available_stock_locations' => [2,3,4],
       ],
     ],
     'test_store_c' => [
@@ -152,8 +164,8 @@ function commerce_stock_base_install() {
           'country_code' => $country_code,
         ],
         'default_currency' => $currency_code,
-        'field_stock_allocation_location' => 3,
-        'field_available_stock_locations' => [1,2,3,4],
+        'field_stock_allocation_location' => 5,
+        'field_available_stock_locations' => [5],
       ],
     ],
     'test_warehouse_d' => [
@@ -166,8 +178,8 @@ function commerce_stock_base_install() {
           'country_code' => $country_code,
         ],
         'default_currency' => $currency_code,
-        'field_stock_allocation_location' => 5,
-        'field_available_stock_locations' => [5, 6, 7, 8],
+        'field_stock_allocation_location' => 6,
+        'field_available_stock_locations' => [6],
       ],
     ],
     'test_warehouse_e' => [
@@ -180,8 +192,8 @@ function commerce_stock_base_install() {
           'country_code' => $country_code,
         ],
         'default_currency' => $currency_code,
-        'field_stock_allocation_location' => 6,
-        'field_available_stock_locations' => [5, 6, 7, 8],
+        'field_stock_allocation_location' => 7,
+        'field_available_stock_locations' => [7],
       ],
     ],
     'test_physical_f' => [
@@ -194,8 +206,8 @@ function commerce_stock_base_install() {
           'country_code' => $country_code,
         ],
         'default_currency' => $currency_code,
-        'field_stock_allocation_location' => 7,
-        'field_available_stock_locations' => [5, 6, 7, 8],
+        'field_stock_allocation_location' => 8,
+        'field_available_stock_locations' => [8, 9],
       ],
     ],
     'test_physical_g' => [
@@ -208,8 +220,8 @@ function commerce_stock_base_install() {
           'country_code' => $country_code,
         ],
         'default_currency' => $currency_code,
-        'field_stock_allocation_location' => 8,
-        'field_available_stock_locations' => [5, 6, 7, 8],
+        'field_stock_allocation_location' => 10,
+        'field_available_stock_locations' => [10, 11, 12],
       ],
     ],
   ];
@@ -294,6 +306,4 @@ function commerce_stock_base_install() {
     ->setComponent('field_stock_allocation_location', [
           'type' => 'hidden',
       ])->save();
-
-  \Drupal::service('module_installer')->install(['default_content'], TRUE); 
 }
